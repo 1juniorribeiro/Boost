@@ -16,17 +16,11 @@ class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
-  client_id: string;
-
-  @OneToMany(() => Client, client => client.user_id)
+  @OneToMany(() => Client, client => client.user)
   client: Client;
 
-  @Column()
-  appointment_id: string;
-
-  @OneToMany(() => Appointment, appointment => appointment.user_id)
-  appointment: Appointment[];
+  @OneToMany(() => Appointment, appointment => appointment.user)
+  appointment: Appointment;
 
   @Column()
   name: string;

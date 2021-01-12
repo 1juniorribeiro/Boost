@@ -6,6 +6,7 @@ import {
   UpdateDateColumn,
   OneToMany,
   ManyToOne,
+  JoinColumn,
 } from 'typeorm';
 
 import User from './user';
@@ -19,14 +20,12 @@ class Client {
   @Column()
   user_id: string;
 
-  @ManyToOne(() => User, user => user.client_id)
+  @ManyToOne(() => User, user => user.client)
+  @JoinColumn({ name: 'user_id'})
   user: User;
 
-  @Column()
-  appointment_id: string;
-
-  @OneToMany(() => Appointment, appointment => appointment.client_id)
-  appointment: Appointment[];
+  @OneToMany(() => Appointment, appointment => appointment.client)
+  appointment: Appointment;
 
   @Column()
   name: string;

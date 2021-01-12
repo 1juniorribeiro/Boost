@@ -5,6 +5,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   ManyToOne,
+  JoinColumn,
 } from 'typeorm';
 
 import User from './user';
@@ -18,13 +19,15 @@ class Appointment {
   @Column()
   user_id: string;
 
-  @ManyToOne(() => User, user => user.appointment_id)
+  @ManyToOne(() => User, user => user.appointment)
+  @JoinColumn({name: 'user_id'})
   user: User;
 
   @Column()
   client_id: string;
 
-  @ManyToOne(() => Client, client => client.appointment_id)
+  @ManyToOne(() => Client, client => client.appointment)
+  @JoinColumn({ name: 'client_id'})
   client: Client;
 
   @Column('timestamp with time zone')

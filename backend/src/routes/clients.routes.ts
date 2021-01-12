@@ -6,11 +6,12 @@ const clientsRouter = Router();
 
 clientsRouter.post('/', async (request, response) => {
     try {
-      const {name, phone} = request.body
+      const {name, phone, user_id} = request.body
 
       const createClient = new CreateClientService();
 
       const client = await createClient.execute({
+        user_id,
         name,
         phone,
       });
