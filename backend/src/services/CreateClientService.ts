@@ -3,13 +3,13 @@ import { getRepository } from 'typeorm'
 import Client from '../models/client'
 
 interface Request {
-  user_id: string
+  id: string
   name: string;
   phone: bigint;
 }
 
 class CreateClientService {
-  public async execute({ name, phone, user_id}: Request): Promise<Client> {
+  public async execute({ name, phone, id}: Request): Promise<Client> {
     const clientRepository = getRepository(Client);
 
     const checkClientExists = await clientRepository.findOne({
@@ -21,7 +21,7 @@ class CreateClientService {
     }
 
     const client = clientRepository.create({
-      user_id,
+      id,
       name,
       phone,
     });
