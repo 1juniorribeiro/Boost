@@ -11,6 +11,7 @@ interface Request {
 }
 
 interface Response {
+  user: User;
   token: string,
 }
 
@@ -38,6 +39,7 @@ class AuthenticateUserService {
     })
 
     return {
+      user,
       token,
     }
   }

@@ -1,16 +1,24 @@
 import { getRepository } from 'typeorm'
 
 import Client from '../models/client'
+import User from '../models/user'
 
 interface Request {
-  id: string
+  user_id: string
   name: string;
   phone: bigint;
 }
 
 class CreateClientService {
-  public async execute({ name, phone, id}: Request): Promise<Client> {
+  public async execute({ name, phone, user_id}: Request): Promise<Client> {
     const clientRepository = getRepository(Client);
+    const usersRepository = getRepository(User);
+
+    const user = await usersRepository.findOne(user_id);
+
+    if (!user) {
+      throw new Error('Somente usuarios podem criar clientes!')
+    }
 
     const checkClientExists = await clientRepository.findOne({
       where: { phone },
@@ -21,7 +29,7 @@ class CreateClientService {
     }
 
     const client = clientRepository.create({
-      id,
+      user_id,
       name,
       phone,
     });

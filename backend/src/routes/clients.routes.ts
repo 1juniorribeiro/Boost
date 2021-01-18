@@ -12,12 +12,10 @@ clientsRouter.post('/', async (request, response) => {
     try {
       const {name, phone} = request.body
 
-      const { id } = request.user
-
       const createClient = new CreateClientService();
 
       const client = await createClient.execute({
-        id,
+        user_id: request.user.id,
         name,
         phone,
       });
