@@ -9,21 +9,17 @@ const clientsRouter = Router();
 clientsRouter.use(ensureAuthenticated)
 
 clientsRouter.post('/', async (request, response) => {
-    try {
-      const {name, phone} = request.body
+    const {name, phone} = request.body
 
-      const createClient = new CreateClientService();
+    const createClient = new CreateClientService();
 
-      const client = await createClient.execute({
-        user_id: request.user.id,
-        name,
-        phone,
-      });
+    const client = await createClient.execute({
+      user_id: request.user.id,
+      name,
+      phone,
+    });
 
-      return response.json(client);
-    } catch(err) {
-        return response.status(400).json({ error: err.message})
-    }
+    return response.json(client);
 });
 
 export default clientsRouter;
