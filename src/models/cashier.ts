@@ -4,16 +4,17 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
-  OneToMany,
   ManyToOne,
   JoinColumn,
+  OneToMany,
 } from 'typeorm';
 
 import User from './user';
-import Appointment from './appointments';
+import Sale from './sale';
+import Expense from './expense';
 
-@Entity('clients')
-class Client {
+@Entity('cashiers')
+class Cashier {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -24,14 +25,14 @@ class Client {
   @JoinColumn({ name: 'user_id' })
   user: User;
 
-  @OneToMany(() => Appointment, appointment => appointment.client)
-  appointment: Appointment;
+  @OneToMany(() => Sale, sale => sale.cashier)
+  sale: Sale;
 
-  @Column()
-  name: string;
+  @OneToMany(() => Expense, expense => expense.cashier)
+  expense: Expense;
 
-  @Column('bigint')
-  phone: bigint;
+  @Column('decimal')
+  balance: number;
 
   @CreateDateColumn()
   created_at: Date;
@@ -40,4 +41,4 @@ class Client {
   updated_at: Date;
 }
 
-export default Client;
+export default Cashier;

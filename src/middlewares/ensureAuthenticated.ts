@@ -3,7 +3,7 @@ import { verify } from 'jsonwebtoken';
 
 import authConfig from '../config/auth';
 
-import AppError from '../errors/AppError'
+import AppError from '../errors/AppError';
 
 interface TokenPayLoad {
   iat: number;
@@ -13,29 +13,28 @@ interface TokenPayLoad {
 
 export default function ensureAuthenticated(
   request: Request,
-  response:Response,
+  response: Response,
   next: NextFunction,
 ): void {
   const authHeader = request.headers.authorization;
 
-  if(!authHeader) {
+  if (!authHeader) {
     throw new AppError('JWT token is missing');
   }
 
-  const [, token ] = authHeader.split(' ');
+  const [, token] = authHeader.split(' ');
 
   try {
-  const decoded = verify(token, authConfig.jwt.secret);
+    const decoded = verify(token, authConfig.jwt.secret);
 
-  const { sub } = decoded as TokenPayLoad;
+    const { sub } = decoded as TokenPayLoad;
 
-  request.user = {
-    id: sub,
-  }
+    request.user = {
+      id: sub,
+    };
 
-  return next();
+    return next();
   } catch (err) {
-    throw new AppError('Invalid JWT token')
+    throw new AppError('Invalid JWT token');
   }
-
 }

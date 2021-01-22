@@ -4,18 +4,22 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
-  OneToMany,
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
 
 import User from './user';
-import Appointment from './appointments';
 
-@Entity('clients')
-class Client {
+@Entity('products')
+class Product {
   @PrimaryGeneratedColumn('uuid')
   id: string;
+
+  @Column()
+  name: string;
+
+  @Column()
+  avatar: string;
 
   @Column()
   user_id: string;
@@ -24,14 +28,8 @@ class Client {
   @JoinColumn({ name: 'user_id' })
   user: User;
 
-  @OneToMany(() => Appointment, appointment => appointment.client)
-  appointment: Appointment;
-
-  @Column()
-  name: string;
-
-  @Column('bigint')
-  phone: bigint;
+  @Column('decimal')
+  price: number;
 
   @CreateDateColumn()
   created_at: Date;
@@ -40,4 +38,4 @@ class Client {
   updated_at: Date;
 }
 
-export default Client;
+export default Product;

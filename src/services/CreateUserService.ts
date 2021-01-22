@@ -1,15 +1,15 @@
-import { getRepository } from 'typeorm'
+import { getRepository } from 'typeorm';
 
 import { hash } from 'bcryptjs';
 
-import User from '../models/user'
+import User from '../models/user';
 
-import AppError from '../errors/AppError'
+import AppError from '../errors/AppError';
 
 interface Request {
   name: string;
   email: string;
-  password: string
+  password: string;
 }
 
 class CreateUserService {
@@ -20,7 +20,7 @@ class CreateUserService {
       where: { email },
     });
 
-    if(checkUserExists) {
+    if (checkUserExists) {
       throw new AppError('Email já está sendo utilizado');
     }
 

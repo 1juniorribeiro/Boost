@@ -6,7 +6,7 @@ import uploadConfig from '../config/upload';
 
 import User from '../models/user';
 
-import AppError from '../errors/AppError'
+import AppError from '../errors/AppError';
 
 interface Request {
   user_id: string;
@@ -14,13 +14,16 @@ interface Request {
 }
 
 class UpdateUserAvatarService {
-  public async execute({ user_id, avatarFileName}: Request): Promise<User> {
+  public async execute({ user_id, avatarFileName }: Request): Promise<User> {
     const usersRepository = getRepository(User);
 
     const user = await usersRepository.findOne(user_id);
 
     if (!user) {
-      throw new AppError('Somente usuarios autenticados podem atualizar um avatar', 401);
+      throw new AppError(
+        'Somente usuarios autenticados podem atualizar um avatar',
+        401,
+      );
     }
 
     if (user.avatar) {
@@ -40,4 +43,4 @@ class UpdateUserAvatarService {
   }
 }
 
-export default UpdateUserAvatarService
+export default UpdateUserAvatarService;

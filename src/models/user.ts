@@ -8,8 +8,12 @@ import {
   OneToMany,
 } from 'typeorm';
 
-import Client from './client'
+import Client from './client';
 import Appointment from './appointments';
+import Cashier from './cashier';
+import Form_of_payment from './form_of_payment';
+import Product from './product';
+import Payment from './payment';
 
 @Entity('users')
 class User {
@@ -21,6 +25,18 @@ class User {
 
   @OneToMany(() => Appointment, appointment => appointment.user)
   appointment: Appointment;
+
+  @OneToMany(() => Cashier, cashier => cashier.user)
+  cashier: Cashier;
+
+  @OneToMany(() => Form_of_payment, form_of_payment => form_of_payment.user)
+  form_of_payment: Form_of_payment;
+
+  @OneToMany(() => Product, product => product.user)
+  product: Product;
+
+  @OneToMany(() => Payment, payment => payment.user)
+  payment: Payment;
 
   @Column()
   name: string;
