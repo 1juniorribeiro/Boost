@@ -1,0 +1,73 @@
+// import { getRepository } from 'typeorm';
+
+// import Payment from '../models/payment';
+// import User from '../models/user';
+// import FormOfPayment from '../models/form_of_payment';
+// import Sale from '../models/sale';
+
+// import AppError from '../errors/AppError';
+
+// interface Request {
+//   user_id: string;
+//   value: number;
+//   paid: boolean;
+//   form_of_payment_id: string;
+//   sale_id: string;
+// }
+
+// class PaymentService {
+//   public async execute({
+//     value,
+//     paid,
+//     form_of_payment_id,
+//     sale_id,
+//     user_id,
+//   }: Request): Promise<Payment> {
+//     const PaymentRepository = getRepository(Payment);
+//     const usersRepository = getRepository(User);
+//     const formOfPaymentRepository = getRepository(FormOfPayment);
+//     const saleRepository = getRepository(Sale);
+
+//     const user = await usersRepository.findOne(user_id);
+
+//     if (!user) {
+//       throw new AppError('Somente usuarios podem criar pagamentos!', 401);
+//     }
+
+//     const sale = await saleRepository.findOne(sale_id);
+
+//     if (!sale) {
+//       throw new AppError('Venda não encontrada para pagamento', 400);
+//     }
+
+//     const formOfPayment = await formOfPaymentRepository.findOne(
+//       form_of_payment_id,
+//     );
+
+//     if (!formOfPayment) {
+//       throw new AppError('Forma de pagamento invalida', 400);
+//     }
+
+//     if (sale.value - value = 0) {
+//       const payment = PaymentRepository.create({
+//         value,
+//         paid: true,
+//         form_of_payment_id,
+//         sale_id,
+//         user_id,
+//       });
+
+//       await PaymentRepository.save(payment);
+//     }
+//     const payment = PaymentRepository.create({
+//       user_id,
+//       name,
+//     });
+
+//     await formOfPaymentRepository.save(formOfPayment);
+
+//     return formOfPayment;
+//   }
+// }
+
+// export default PaymentService;
