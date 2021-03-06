@@ -34,7 +34,7 @@ class Payment {
   @JoinColumn({ name: 'form_of_payment_id' })
   form_of_payment: FormOfPayment;
 
-  @Column('boolean', { default: false })
+  @Column('boolean', { default: true })
   paid: boolean;
 
   @Column()

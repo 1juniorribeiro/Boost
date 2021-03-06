@@ -1,19 +1,18 @@
-// import { EntityRepository, Repository } from 'typeorm';
+import { EntityRepository, Repository } from 'typeorm';
 
-// import Payment from '../models/payment';
-// import Sale from '../models/sale';
+import Payment from '../models/payment';
+import Sale from '../models/sale';
 
-// interface Balance {
-//   value: number;
-//   PaymentValue: number;
-//   total: number;
-// }
+interface Balance {
+  value: number;
+  total: number;
+}
 
-// @EntityRepository(Payment)
-// class TransactionsRepository extends Repository<Payment> {
-//   public async getBalance(): Promise<Balance> {
+@EntityRepository(Payment)
+class PaymentRepository extends Repository<Payment> {
+  public async getBalance(): Promise<Balance> {
+    
+  }
+}
 
-//   }
-// }
-
-// export default TransactionsRepository;
+export default PaymentRepository;
